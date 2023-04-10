@@ -1,12 +1,12 @@
-using CleanArch.Application.Modules.WeatherForecast.UseCases.Queries;
-using CleanArch.Application.Modules.WeatherForecast.UseCases.ViewModels;
+using CleanArch.Application.Modules.WeatherForecasts.UseCases.Queries;
+using CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/weather-forecast")]
+[Route("api/weather-forecasts")]
 public class WeatherForecastController : ControllerBase
 {
     private readonly IMediator _mediator;

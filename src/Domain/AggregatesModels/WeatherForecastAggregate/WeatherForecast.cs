@@ -1,6 +1,6 @@
-namespace CleanArch.Domain.AggregatesModels.WeatherForecast;
+namespace CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 
-public class WeatherForecastAggregate : EntityBase, IAggregateRoot
+public class WeatherForecast : EntityBase, IAggregateRoot
 {
     public DateOnly Date { get; set; }
 
@@ -10,8 +10,8 @@ public class WeatherForecastAggregate : EntityBase, IAggregateRoot
 
     public string? Summary { get; set; }
 
-    public WeatherForecastAggregate() {}
-    public WeatherForecastAggregate(
+    public WeatherForecast() {}
+    public WeatherForecast(
         int id,
         DateOnly date,
         int temperatureC,
