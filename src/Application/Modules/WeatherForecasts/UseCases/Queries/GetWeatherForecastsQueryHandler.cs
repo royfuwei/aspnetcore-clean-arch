@@ -1,14 +1,16 @@
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
+using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
+using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
 
 namespace CleanArch.Application.Modules.WeatherForecasts.UseCases.Queries;
 
 public class GetWeatherForecastsQueryHandler 
     : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDTO>>
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    private readonly IWeatherForecastRepository _weatherForecastRepository;
+
+    public GetWeatherForecastsQueryHandler(IWeatherForecastRepository weatherForecastRepository)
+        => (_weatherForecastRepository) = (weatherForecastRepository);
     
 
     /// <summary>
@@ -17,15 +19,15 @@ public class GetWeatherForecastsQueryHandler
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Task.FromResult(IEnumerable<WeatherForecastDTO>)</returns>
-    public Task<IEnumerable<WeatherForecastDTO>> Handle(GetWeatherForecastsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<WeatherForecastDTO>> Handle(GetWeatherForecastsQuery request, CancellationToken cancellationToken)
     {
-        var rng = new Random();
+        var data = await _weatherForecastRepository.GetAllAsync();
         
-        return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecastDTO
+        return data.Select(item => new WeatherForecastDTO
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = rng.Next(-20, 55),
-            Summary = Summaries[rng.Next(Summaries.Length)]
-        }));
+            Date = item.Date,
+            TemperatureC = item.TemperatureC,
+            Summary = item.Summary
+        });
     }
 }
