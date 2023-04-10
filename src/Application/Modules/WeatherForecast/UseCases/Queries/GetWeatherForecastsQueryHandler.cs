@@ -1,5 +1,5 @@
-using CleanArch.Application.Modules.WeatherForecast.UseCase.ViewModels;
-namespace CleanArch.Application.Modules.WeatherForecast.UseCase.Queries;
+using CleanArch.Application.Modules.WeatherForecast.UseCases.ViewModels;
+namespace CleanArch.Application.Modules.WeatherForecast.UseCases.Queries;
 
 public class GetWeatherForecastsQueryHandler 
     : IRequestHandler<GetWeatherForecastsQuery, IEnumerable<WeatherForecastDTO>>

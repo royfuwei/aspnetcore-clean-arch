@@ -1,4 +1,4 @@
-namespace CleanArch.Application.Modules.WeatherForecast.UseCase.ViewModels;
+namespace CleanArch.Application.Modules.WeatherForecast.UseCases.ViewModels;
 
 /// <summary>
 /// 用ViewModel DTO 方式資料回給前端

@@ -1,5 +1,5 @@
-using CleanArch.Application.Modules.WeatherForecast.UseCase.Queries;
-using CleanArch.Application.Modules.WeatherForecast.UseCase.ViewModels;
+using CleanArch.Application.Modules.WeatherForecast.UseCases.Queries;
+using CleanArch.Application.Modules.WeatherForecast.UseCases.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
