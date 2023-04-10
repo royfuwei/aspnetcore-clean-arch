@@ -1,5 +1,3 @@
-using CleanArch.Domain.SeedWork.Interfaces;
-
 namespace CleanArch.Domain.SeedWork;
 
 public abstract class EntityBase : IEntityBase

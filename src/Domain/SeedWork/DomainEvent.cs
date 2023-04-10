@@ -1,3 +1,3 @@
 namespace CleanArch.Domain.SeedWork;
 
-public abstract class DomainEvent {}
+public abstract class DomainEvent : INotification {}
