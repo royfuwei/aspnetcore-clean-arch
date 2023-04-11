@@ -17,24 +17,21 @@ public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
     };
 
     private void InitialData() {
-        Console.WriteLine($"InitialData !! _dataMap.Count(): {_dataMap.Count()}");
-        if (_dataMap.Count() > 0) return;
-        var rng = new Random();
+        int[] temperatureCList = new[] { 7, 17, 27, 6, 37 };
+        string[] summaryList = new[] { "Chilly", "Mild", "Warm", "Cool", "Hot" };
 
-        var data = Enumerable.Range(1, 5).Select(index => {
-
-            var date = DateOnly.FromDateTime(DateTime.Now.AddDays(index));
-            var temperatureC = rng.Next(-20, 55);
-            var summary = Summaries[rng.Next(Summaries.Length)];
-            return new WeatherForecast
-            {
-                Date = date,
-                TemperatureC = temperatureC,
-                Summary = summary
-            };
-        });
-
-        _dataMap = _dataMap.Concat(data);
+        foreach (var (_, index) in summaryList.Select((_, index) => (_, index)))
+        {
+            int id = index+1 ;
+            _dataMap = _dataMap.Append(
+                new WeatherForecast(
+                    id: id,
+                    date: DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    temperatureC: temperatureCList[index],
+                    summary: summaryList[index]
+                )
+            );
+        }
     }
 
     public Task<WeatherForecast> Add(WeatherForecast item)

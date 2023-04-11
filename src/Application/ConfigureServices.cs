@@ -15,9 +15,7 @@ public static class ApplicationConfigureServices
         // 原生DI MediatR
         service.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         service.AddSingleton(typeof(IWeatherForecastRepository), typeof(InMemoryWeatherForecastRepository));
-        // service.AddScoped(typeof(IWeatherForecastRepository), typeof(InMemoryWeatherForecastRepository));
 
-        // InMemoryWeatherForecastRepository.InitialData();
         return service;
     }
 }
