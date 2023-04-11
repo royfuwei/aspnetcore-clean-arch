@@ -6,6 +6,8 @@ namespace CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
 /// </summary>
 public class WeatherForecastDTO
 {
+    public int Id { get; set;}
+
     public DateOnly Date { get; set; }
 
     public int TemperatureC { get; set; }

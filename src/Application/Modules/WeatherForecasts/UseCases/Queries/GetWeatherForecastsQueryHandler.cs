@@ -25,6 +25,7 @@ public class GetWeatherForecastsQueryHandler
         
         return data.Select(item => new WeatherForecastDTO
         {
+            Id = item.Id,
             Date = item.Date,
             TemperatureC = item.TemperatureC,
             Summary = item.Summary
