@@ -1,6 +1,5 @@
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
-using CleanArch.Domain.DomainEvents;
 
 namespace CleanArch.Application.Modules.WeatherForecasts.UseCases.Commands;
 public class CreateWeatherForecastItemCommandHandler : IRequestHandler<CreateWeatherForecastItemCommand, bool>
@@ -23,16 +22,8 @@ public class CreateWeatherForecastItemCommandHandler : IRequestHandler<CreateWea
         };
 
         await _repository.Add(entity);
+        entity.AddWeatherForcastFinishDomainEvent();
 
-        await CreatedWeatherForecastItemDomainEvent(entity, cancellationToken);
-        return true;
-    }
-
-    private async Task CreatedWeatherForecastItemDomainEvent(WeatherForecast entity, CancellationToken cancellationToken)
-    {
-        /* entity.AddDomainEvent(new WeatherForecastCreatedEvent());
-        _repository.UnitOfWork.SaveChangesAsync(cancellationToken); */
-        await _mediator.Publish(new WeatherForecastCreatedEvent());
-        return;
+        return await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);;
     }
 }
