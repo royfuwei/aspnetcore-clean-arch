@@ -1,3 +1,5 @@
+using CleanArch.Domain.DomainEvents;
+
 namespace CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 
 public class WeatherForecast : EntityBase, IAggregateRoot
@@ -17,4 +19,12 @@ public class WeatherForecast : EntityBase, IAggregateRoot
         int temperatureC,
         string summary
     ) => (Id, Date, TemperatureC, Summary) = (id, date,temperatureC, summary);
+
+
+    /// <summary>
+    /// 測試 Domain Events
+    /// </summary>
+    public void AddWeatherForcastFinishDomainEvent() {
+        this.AddDomainEvent(new WeatherForecastCreatedEvent());
+    }
 }
