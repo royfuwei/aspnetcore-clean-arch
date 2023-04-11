@@ -22,6 +22,10 @@ public class WeatherForecastController : ControllerBase
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
+    /// <summary>
+    /// GetWeatherForecast List
+    /// </summary>
+    /// <returns></returns>
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IEnumerable<WeatherForecastDTO>> Get()
     {
