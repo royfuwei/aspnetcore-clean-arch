@@ -6,10 +6,17 @@ namespace CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
 public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
 {
     protected IEnumerable<WeatherForecast> _dataMap = new List<WeatherForecast>() {};
+    protected ILogger<InMemoryWeatherForecastRepository> _logger;
 
     IUnitOfWork IRepository<WeatherForecast>.UnitOfWork => throw new NotImplementedException();
 
-    public InMemoryWeatherForecastRepository() => InitialData();
+    public InMemoryWeatherForecastRepository(
+        ILogger<InMemoryWeatherForecastRepository> logger
+    )
+    {
+        _logger = logger;
+        InitialData();
+    }
 
     private readonly string[] Summaries = new[]
     {
@@ -32,10 +39,13 @@ public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
                 )
             );
         }
+
+        _logger.LogInformation("Run InitialData() _dataMap count: {Count}", _dataMap.Count());
     }
 
     public Task<WeatherForecast> Add(WeatherForecast item)
     {
+        item.Id = _dataMap.Count() + 1;
         _dataMap = _dataMap.Append(item);
         return Task.FromResult(item);
     }
