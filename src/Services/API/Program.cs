@@ -1,4 +1,5 @@
 using CleanArch.Application;
+using CleanArch.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 // Builder Project: Application ConfigureServices
 // builder.Services.AddApplicationServices();
 ApplicationConfigureServices.AddApplicationServices(builder.Services);
+InfrastructureConfigureServices.AddInfrastructureServices(builder.Services);
 
 
 var app = builder.Build();
