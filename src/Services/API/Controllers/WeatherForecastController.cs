@@ -1,3 +1,4 @@
+using CleanArch.Application.Modules.WeatherForecasts.UseCases.Commands;
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.Queries;
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
 using MediatR;
@@ -25,5 +26,14 @@ public class WeatherForecastController : ControllerBase
     public async Task<IEnumerable<WeatherForecastDTO>> Get()
     {
         return await _mediator.Send(new GetWeatherForecastsQuery());
+    }
+
+
+    [HttpPost(Name = "AddWeatherForecast")]
+    public async Task<bool> Add(
+        [FromBody] CreateWeatherForecastItemCommand command
+    )
+    {
+        return await _mediator.Send(command);
     }
 }
