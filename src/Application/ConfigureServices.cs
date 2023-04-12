@@ -1,4 +1,5 @@
 using System.Reflection;
+using CleanArch.Application.Modules.WeatherForecasts.Repositories.EFcore;
 using CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,8 @@ public static class ConfigureServices
     {
         // 原生DI MediatR
         service.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-        service.AddSingleton(typeof(IWeatherForecastRepository), typeof(InMemoryWeatherForecastRepository));
+        // service.AddSingleton(typeof(IWeatherForecastRepository), typeof(InMemoryWeatherForecastRepository));
+        service.AddScoped(typeof(IWeatherForecastRepository), typeof(EFCoreWeatherForecastRepository));
 
         return service;
     }
