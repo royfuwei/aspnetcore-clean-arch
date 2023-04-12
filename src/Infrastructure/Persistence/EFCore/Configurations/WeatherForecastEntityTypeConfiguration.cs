@@ -7,7 +7,7 @@ public class WeatherForecastEntityTypeConfiguration : IEntityTypeConfiguration<W
     public void Configure(EntityTypeBuilder<WeatherForecast> builder)
     {
         // table & schema
-        builder.ToTable("weatherForecasts", WeatherForecastDbContext.DEFAULT_SCHEMA);
+        builder.ToTable("weatherForecasts", WeatherForecastContext.DEFAULT_SCHEMA);
         
         // has key
         builder.HasKey(o => o.Id);

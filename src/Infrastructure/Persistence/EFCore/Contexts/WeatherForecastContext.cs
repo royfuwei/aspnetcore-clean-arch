@@ -1,7 +1,7 @@
 using CleanArch.Infrastructure.Persistence.EFCore.Configurations;
 
 namespace CleanArch.Infrastructure.Persistence.EFCore.Contexts;
-public class WeatherForecastDbContext : DbContext, IUnitOfWork
+public class WeatherForecastContext : DbContext, IUnitOfWork
 {
     public const string DEFAULT_SCHEMA = "weatherforecast";
 
@@ -9,9 +9,12 @@ public class WeatherForecastDbContext : DbContext, IUnitOfWork
 
     private readonly IMediator _mediator;
 
-    public WeatherForecastDbContext(
+    // public WeatherForecastContext(DbContextOptions<WeatherForecastContext> options) : base(options) {}
+
+    public WeatherForecastContext(
+        DbContextOptions<WeatherForecastContext> options,
         IMediator mediator
-    ) 
+    ) : base(options)
     {
         _mediator = mediator ?? throw new ArgumentNullException();
     }

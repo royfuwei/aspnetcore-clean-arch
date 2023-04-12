@@ -40,7 +40,7 @@ public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
             weatherForecasts = weatherForecasts.Append(
                 new WeatherForecast(
                     id: id,
-                    date: DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    date: DateTime.Now.AddDays(index),
                     temperatureC: temperatureCList[index],
                     summary: summaryList[index]
                 )

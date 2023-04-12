@@ -17,7 +17,7 @@ public class CreateWeatherForecastItemCommandHandler : IRequestHandler<CreateWea
     {
         var entity = new WeatherForecast{
             Summary = command.Summary,
-            Date = DateOnly.FromDateTime(command.Date),
+            Date = command.Date,
             TemperatureC = command.TemperatureC,
         };
 
