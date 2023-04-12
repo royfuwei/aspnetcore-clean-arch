@@ -5,7 +5,7 @@ public class WeatherForecastContext : DbContext, IUnitOfWork
 {
     public const string DEFAULT_SCHEMA = "weatherforecast";
 
-    public DbSet<WeatherForecast>? WeatherForecasts { get; set; }
+    public required DbSet<WeatherForecast> WeatherForecasts { get; set; }
 
     private readonly IMediator _mediator;
 
