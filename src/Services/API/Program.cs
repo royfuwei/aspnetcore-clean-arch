@@ -23,8 +23,10 @@ builder.Services.AddSwaggerGen(options =>
 
 // Builder Project: Application ConfigureServices
 // builder.Services.AddApplicationServices();
-ApplicationConfigureServices.AddApplicationServices(builder.Services);
-InfrastructureConfigureServices.AddInfrastructureServices(builder.Services);
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddCustomDbContext(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
+// InfrastructureConfigureServices.AddInfrastructureServices(builder.Services);
 
 
 var app = builder.Build();
