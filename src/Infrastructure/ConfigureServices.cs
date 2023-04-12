@@ -21,17 +21,17 @@ public static class ConfigureServices
     {
         if (bool.Parse(configuration["UseInMemoryDatabase"]!))
         {
-            service.AddDbContext<WeatherForecastDbContext>(options => {
+            service.AddDbContext<WeatherForecastContext>(options => {
                 options.UseInMemoryDatabase("CleanArchDb");
             });
         } 
         else
         {
-            service.AddDbContext<WeatherForecastDbContext>(options => {
+            service.AddDbContext<WeatherForecastContext>(options => {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                     sqlServerOptionsAction: sqlOptions =>
                     {
-                        sqlOptions.MigrationsAssembly(typeof(WeatherForecastDbContext).Assembly.FullName);
+                        sqlOptions.MigrationsAssembly(typeof(WeatherForecastContext).Assembly.FullName);
                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                     });
             });
