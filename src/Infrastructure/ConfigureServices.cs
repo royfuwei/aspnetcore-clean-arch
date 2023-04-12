@@ -23,7 +23,7 @@ public static class ConfigureServices
         {
             service.AddDbContext<WeatherForecastContext>(options => {
                 options.UseInMemoryDatabase("CleanArchDb");
-            });
+            }, ServiceLifetime.Scoped);
         } 
         else
         {
@@ -34,7 +34,9 @@ public static class ConfigureServices
                         sqlOptions.MigrationsAssembly(typeof(WeatherForecastContext).Assembly.FullName);
                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                     });
-            });
+                },
+                ServiceLifetime.Scoped
+            );
         }
 
         return service;
