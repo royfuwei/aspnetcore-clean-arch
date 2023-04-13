@@ -17,3 +17,32 @@ Simple Aspnet Clean Architecture
 # start Services/API service
 dotnet run src/Services/API
 ```
+
+### Entity Framework Core
+
+#### Migration
+`appsettings.json`
+```json
+...
+    "UseInMemoryDatabase": false,
+...
+```
+
+在`src/Services/API` project 使用Migrations
+
+```sh
+# 
+dotnet ef database update --project src/Services/API
+
+# 初次使用 或是 有異動context 跑migration
+dotnet ef migrations add InitialCreate --project src/Services/API
+
+# update database
+dotnet ef database update --project src/Services/API
+
+# drop database
+dotnet ef database drop --project src/Services/API
+```
+> Entity Framework Core 使用`UseInMemoryDatabase` 無法使用`dotnet ef`
+
+
