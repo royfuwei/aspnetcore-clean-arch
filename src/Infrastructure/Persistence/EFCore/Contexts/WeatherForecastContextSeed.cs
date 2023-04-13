@@ -1,8 +1,9 @@
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 using CleanArch.Infrastructure.Persistence.EFCore.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace CleanArch.Services.API.Infrastructure.EFCore;
+namespace CleanArch.Infrastructure.Persistence.EFCore;
 
 /// <summary>
 /// EFCore WeatherForecastContext Initialise, Seed Data

@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CleanArch.Services.API.Migrations
+namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
 {
     [DbContext(typeof(WeatherForecastContext))]
-    [Migration("20230413024049_InitialCreate")]
+    [Migration("20230413111416_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

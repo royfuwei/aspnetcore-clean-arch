@@ -1,8 +1,7 @@
 using System.Reflection;
 using CleanArch.Application;
 using CleanArch.Infrastructure;
-using CleanArch.Services.API;
-using CleanArch.Services.API.Infrastructure.EFCore;
+using CleanArch.Infrastructure.Persistence.EFCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,12 +22,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-// Builder Project: Application ConfigureServices
-// builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddCustomDbContext(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
-// InfrastructureConfigureServices.AddInfrastructureServices(builder.Services);
 
 
 var app = builder.Build();
