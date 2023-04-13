@@ -2,6 +2,7 @@ using System.Reflection;
 using CleanArch.Application;
 using CleanArch.Infrastructure;
 using CleanArch.Services.API;
+using CleanArch.Services.API.Infrastructure.EFCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var initialiser = scope.ServiceProvider.GetRequiredService<WeatherForecastContextSeed>();
+        await initialiser.InitialiseAsync();
+        await initialiser.SeedAsync();
+    }
 }
 
 app.UseHttpsRedirection();

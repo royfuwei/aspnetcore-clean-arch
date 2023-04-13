@@ -1,4 +1,5 @@
 using CleanArch.Infrastructure.Persistence.EFCore.Contexts;
+using CleanArch.Services.API.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArch.Services.API;
@@ -27,6 +28,8 @@ public static class ConfigureServices
                 ServiceLifetime.Scoped
             );
         }
+
+        service.AddScoped<WeatherForecastContextSeed>();
 
         return service;
     }
