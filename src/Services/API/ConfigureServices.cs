@@ -1,7 +1,7 @@
 using CleanArch.Infrastructure.Persistence.EFCore.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace API;
+namespace CleanArch.Services.API;
 
 public static class ConfigureServices
 {

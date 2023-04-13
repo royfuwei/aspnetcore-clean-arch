@@ -1,7 +1,7 @@
 using System.Reflection;
 using CleanArch.Application;
 using CleanArch.Infrastructure;
-using API;
+using CleanArch.Services.API;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

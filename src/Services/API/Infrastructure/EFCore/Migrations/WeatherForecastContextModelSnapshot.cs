@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace CleanArch.Services.API.Migrations
 {
     [DbContext(typeof(WeatherForecastContext))]
     partial class WeatherForecastContextModelSnapshot : ModelSnapshot

@@ -4,7 +4,7 @@ using CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace CleanArch.Services.API.Controllers;
 
 [ApiController]
 [Route("api/weather-forecasts")]

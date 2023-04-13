@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace CleanArch.Services.API.Migrations
 {
     [DbContext(typeof(WeatherForecastContext))]
     [Migration("20230413024049_InitialCreate")]
