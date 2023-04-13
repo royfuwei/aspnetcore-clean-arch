@@ -36,16 +36,16 @@ dotnet run src/Services/API
 
 ```sh
 # 
-dotnet ef database update --project src/Services/API
+dotnet ef database update --project src/Infrastructure --startup-project src/Services/API
 
 # 初次使用 或是 有異動context 跑migration
-dotnet ef migrations add InitialCreate --project src/Services/API
+dotnet ef migrations add InitialCreate --project src/Infrastructure --startup-project src/Services/API --output-dir Persistence/EFCore/Migrations
 
 # update database
-dotnet ef database update --project src/Services/API
+dotnet ef database update --project src/Infrastructure --startup-project src/Services/API
 
 # drop database
-dotnet ef database drop --project src/Services/API
+dotnet ef database drop --project src/Infrastructure --startup-project src/Services/API
 ```
 > Entity Framework Core 使用`UseInMemoryDatabase` 無法使用`dotnet ef`
 
