@@ -77,7 +77,6 @@ src
         ├── appsettings.json # API Service 配置檔案，ex: db connection
         ├── ConfigureServices.cs
         ├── Controllers # api controller
-        ├── Infrastructure # 目前放 EFCore migrations 相關資料
         └── Program.cs
 ```
 
