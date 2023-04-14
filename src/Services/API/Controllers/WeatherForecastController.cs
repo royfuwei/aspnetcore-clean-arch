@@ -1,7 +1,6 @@
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.Commands;
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.Queries;
 using CleanArch.Application.Modules.WeatherForecasts.UseCases.ViewModels;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArch.Services.API.Controllers;

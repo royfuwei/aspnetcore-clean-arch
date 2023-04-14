@@ -1,6 +1,3 @@
-using System.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using CleanArch.Infrastructure.Identity.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
