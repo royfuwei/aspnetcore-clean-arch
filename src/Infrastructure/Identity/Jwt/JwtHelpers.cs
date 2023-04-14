@@ -15,6 +15,45 @@ public class JwtHelpers
         _configuration = configuration;
     }
 
+    public async Task<TokenValidationResult> ValidExpiredToken(string token)
+    {
+        var signKey = _configuration.GetValue<string>("JwtSettings:SignKey");
+        var issuer = _configuration.GetValue<string>("JwtSettings:Issuer");
+        var audience = _configuration.GetValue<string>("JwtSettings:Audience");
+        var handler = new JwtSecurityTokenHandler();
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = issuer,
+            ValidateAudience = false,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey!))
+        };
+        var result = await handler.ValidateTokenAsync(token, validationParameters);
+        return result;
+    }
+
+    public async Task<TokenValidationResult> ValidToken(string token)
+    {
+        var signKey = _configuration.GetValue<string>("JwtSettings:SignKey");
+        var issuer = _configuration.GetValue<string>("JwtSettings:Issuer");
+        var audience = _configuration.GetValue<string>("JwtSettings:Audience");
+        var handler = new JwtSecurityTokenHandler();
+        JwtSecurityToken jwtSecurityToken = handler.ReadJwtToken(token);
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = issuer,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey!))
+        };
+        var result = await handler.ValidateTokenAsync(token, validationParameters);
+        return result;
+    }
+
     public string GenerateToken(string userName, int expireMinutes = 30)
     {
         var issuer = _configuration.GetValue<string>("JwtSettings:Issuer");
