@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using CleanArch.Infrastructure.Identity.Jwt;
 using Microsoft.AspNetCore.Authorization;
@@ -22,30 +24,41 @@ public class JwtController : ControllerBase
     
     [HttpGet("token/test")]
     [AllowAnonymous]
-    public Task<string> getTestJwt()
+    public Task<string> GetTestJwt()
     {
-        return Task.FromResult($"Bearer {_jwtHelpers.GenerateToken("test")}");
+        return Task.FromResult(_jwtHelpers.GenerateToken("test"));
     }
 
-    [HttpGet("claims")]
-    public IEnumerable<object> getClaims()
+    /// <summary>
+    /// 驗證 jwt
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("verify")]
+    public async Task<IDictionary<string, object>> GetVerifyClaims()
     {
-        return User.Claims.Select(item => new { item.Type, item.Value });
+        var request = Request;
+        var heaaders = request.Headers;
+        string authorization = heaaders["Authorization"]!;
+        var token = authorization.Split(" ")[1];
+
+        var result = await _jwtHelpers.ValidToken(token);
+        return result.Claims;
     }
 
-    // 回傳我們剛剛在產Token時輸入的username
-    [HttpGet("username")]
-    public IActionResult GetUserName()
+    /// <summary>
+    /// 驗證過期的 jwt
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("verify-expired"), AllowAnonymous]
+    public async Task<IDictionary<string, object>> GetVerifyExpiredClaims()
     {
-        Console.WriteLine($"User.Identity.Name: {User.Identity.Name}");
-        return Ok(User.Identity.Name);
+        var request = Request;
+        var heaaders = request.Headers;
+        string authorization = heaaders["Authorization"]!;
+        var token = authorization.Split(" ")[1];
+
+        var result = await _jwtHelpers.ValidExpiredToken(token);
+        return result.Claims;
     }
 
-    // 傳回Jwt的id
-    [HttpGet("jwtid")]
-    public IActionResult GetUniqueId()
-    {
-        var jti = User.Claims.FirstOrDefault(p => p.Type == "jti");
-        return Ok(jti.Value);
-    }
 }

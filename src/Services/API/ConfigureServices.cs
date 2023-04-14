@@ -21,7 +21,7 @@ public static class ConfigureServices
             {
                 Name = "Authorization",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
+                Type = SecuritySchemeType.Http,
                 Scheme = JwtBearerDefaults.AuthenticationScheme,
                 BearerFormat = "JWT",
                 Description = "JWT Authorization header using the Bearer scheme."
