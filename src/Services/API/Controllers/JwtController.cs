@@ -50,6 +50,7 @@ public class JwtController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("verify-expired"), AllowAnonymous]
+    [Obsolete("Deprecated")]
     public async Task<IDictionary<string, object>> GetVerifyExpiredClaims()
     {
         var request = Request;
