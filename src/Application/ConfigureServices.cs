@@ -1,4 +1,5 @@
 using System.Reflection;
+using CleanArch.Application.Behaviors;
 using CleanArch.Application.Modules.WeatherForecasts.Repositories.EFcore;
 using CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
@@ -15,6 +16,8 @@ public static class ConfigureServices
         service.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         // service.AddSingleton(typeof(IWeatherForecastRepository), typeof(InMemoryWeatherForecastRepository));
         service.AddScoped(typeof(IWeatherForecastRepository), typeof(EFCoreWeatherForecastRepository));
+
+        service.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
         return service;
     }
