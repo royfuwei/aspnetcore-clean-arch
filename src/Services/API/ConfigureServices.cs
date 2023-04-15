@@ -1,4 +1,5 @@
 using System.Reflection;
+using CleanArch.Services.API.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
@@ -6,6 +7,16 @@ namespace CleanArch.Services.API;
 
 public static class ConfigureServices
 {
+    public static IServiceCollection AddAPIServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddControllers(options =>
+            {
+              options.Filters.Add(typeof(ApiExceptionFilterAttribute));
+            })
+            .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
+        return services;
+    }
+
     public static IServiceCollection AddCustomSwaggerGen(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSwaggerGen(options => 

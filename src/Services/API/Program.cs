@@ -19,6 +19,7 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddCustomAuthentication(builder.Configuration);
 builder.Services.AddCustomAuthorization(builder.Configuration);
 builder.Services.AddCustomSwaggerGen(builder.Configuration);
+builder.Services.AddAPIServices(builder.Configuration);
 
 
 var app = builder.Build();

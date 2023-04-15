@@ -51,8 +51,8 @@ public class JwtController : ControllerBase
     public async Task<IDictionary<string, object>> GetVerifyExpiredClaims()
     {
         var request = Request;
-        var heaaders = request.Headers;
-        string authorization = heaaders["Authorization"]!;
+        var headers = request.Headers;
+        string authorization = (string)headers["Authorization"] ?? throw new UnauthorizedAccessException();
         var token = authorization.Split(" ")[1];
 
         var result = await _jwtHelpers.ValidExpiredToken(token);
