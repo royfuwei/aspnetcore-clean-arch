@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using CleanArch.Domain.Common.Interfaces;
-using CleanArch.Domain.Common.Models;
+using CleanArch.Application.Common.Models;
 
-namespace CleanArch.Infrastructure.Identity;
+
+namespace CleanArch.Application.Modules.Identity.UseCases;
 
 public class IdentityService : IIdentityService
 {
@@ -19,6 +19,12 @@ public class IdentityService : IIdentityService
         _userManager = userManager;
         _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
         _authorizationService = authorizationService;
+    }
+
+    public async Task<List<ApplicationUser>> GetUsersAsync()
+    {
+        var users = await _userManager.Users.ToListAsync();
+        return users;
     }
 
     public async Task<string?> GetUserNameAsync(string userId)

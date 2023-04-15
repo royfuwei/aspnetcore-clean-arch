@@ -1,5 +1,4 @@
-using System.Reflection;
-using CleanArch.Infrastructure.Identity;
+using CleanArch.Application.Modules.Identity;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.Extensions.Options;

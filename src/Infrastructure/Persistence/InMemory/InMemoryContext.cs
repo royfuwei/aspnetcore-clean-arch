@@ -1,14 +1,15 @@
+using CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 using CleanArch.Domain.SeedWork;
 using CleanArch.Domain.SeedWork.Interfaces;
 using MediatR;
 
 namespace CleanArch.Infrastructure.Persistence.InMemory;
-public class InMemoryContext : IUnitOfWork
+public class InMemoryContext : IInMemoryContext
 {
     private readonly IMediator _mediator;
 
-    public IEnumerable<WeatherForecast> WeatherForecasts = new List<WeatherForecast>();
+    public IEnumerable<WeatherForecast> WeatherForecasts { get; set;} = new List<WeatherForecast>();
 
     public InMemoryContext(
         IMediator mediator
@@ -34,5 +35,15 @@ public class InMemoryContext : IUnitOfWork
         foreach (var domainEvent in domainEvents)
             await _mediator.Publish(domainEvent);
         return true;
+    }
+
+    Task<int> IUnitOfWork.SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<bool> IUnitOfWork.SaveEntitiesAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }

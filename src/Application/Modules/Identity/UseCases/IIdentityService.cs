@@ -1,10 +1,12 @@
 ﻿
-using CleanArch.Domain.Common.Models;
+using CleanArch.Application.Common.Models;
 
-namespace CleanArch.Domain.Common.Interfaces;
+namespace CleanArch.Application.Modules.Identity.UseCases;
 
 public interface IIdentityService
 {
+    Task<List<ApplicationUser>> GetUsersAsync();
+
     Task<string?> GetUserNameAsync(string userId);
 
     Task<bool> IsInRoleAsync(string userId, string role);

@@ -1,7 +1,7 @@
-﻿using CleanArch.Domain.Common.Models;
+﻿using CleanArch.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArch.Infrastructure.Identity;
+namespace CleanArch.Application.Common.Extensions;
 
 public static class IdentityResultExtensions
 {

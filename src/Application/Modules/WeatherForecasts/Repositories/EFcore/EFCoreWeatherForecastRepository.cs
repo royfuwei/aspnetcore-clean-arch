@@ -1,17 +1,16 @@
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
 using CleanArch.Domain.SeedWork.Interfaces;
-using CleanArch.Infrastructure.Persistence.EFCore.Contexts;
 
 namespace CleanArch.Application.Modules.WeatherForecasts.Repositories.EFcore;
 public class EFCoreWeatherForecastRepository : IWeatherForecastRepository
 {
-    private readonly WeatherForecastContext _context;
+    private readonly IWeatherForecastContext _context;
 
     protected ILogger<EFCoreWeatherForecastRepository> _logger;
 
     public EFCoreWeatherForecastRepository(
-        WeatherForecastContext context,
+        IWeatherForecastContext context,
         ILogger<EFCoreWeatherForecastRepository> logger
     )
     {

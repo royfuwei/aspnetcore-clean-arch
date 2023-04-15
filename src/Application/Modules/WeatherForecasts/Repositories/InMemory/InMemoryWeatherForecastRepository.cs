@@ -1,21 +1,20 @@
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate;
 using CleanArch.Domain.AggregatesModels.WeatherForecastAggregate.Repositories;
 using CleanArch.Domain.SeedWork.Interfaces;
-using CleanArch.Infrastructure.Persistence.InMemory;
 
 namespace CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
 public class InMemoryWeatherForecastRepository : IWeatherForecastRepository
 {
     protected IEnumerable<WeatherForecast> _dataMap = new List<WeatherForecast>() {};
 
-    protected InMemoryContext _context;
+    protected IInMemoryContext _context;
     protected ILogger<InMemoryWeatherForecastRepository> _logger;
 
     IUnitOfWork IRepository<WeatherForecast>.UnitOfWork => _context;
 
     public InMemoryWeatherForecastRepository(
         ILogger<InMemoryWeatherForecastRepository> logger,
-        InMemoryContext context
+        IInMemoryContext context
     )
     {
         _logger = logger;

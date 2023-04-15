@@ -4,18 +4,18 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CleanArch.Infrastructure.Identity.Jwt;
-public class JwtHelpers
+namespace CleanArch.Application.Modules.Jwt.UseCases;
+public class JwtService : IJwtService
 {
     private readonly IConfiguration _configuration;
 
-    public JwtHelpers(
+    public JwtService(
         IConfiguration configuration
     ) {
         _configuration = configuration;
     }
 
-    public async Task<TokenValidationResult> ValidExpiredToken(string token)
+    public SecurityToken ValidExpiredToken(string token)
     {
         var signKey = _configuration.GetValue<string>("JwtSettings:SignKey");
         var issuer = _configuration.GetValue<string>("JwtSettings:Issuer");
@@ -30,11 +30,12 @@ public class JwtHelpers
             ValidateIssuerSigningKey = false,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey!))
         };
-        var result = await handler.ValidateTokenAsync(token, validationParameters);
-        return result;
+        handler.ValidateToken(token, validationParameters, out var validatedToken);
+
+        return validatedToken;
     }
 
-    public async Task<TokenValidationResult> ValidToken(string token)
+    public SecurityToken ValidToken(string token)
     {
         var signKey = _configuration.GetValue<string>("JwtSettings:SignKey");
         var issuer = _configuration.GetValue<string>("JwtSettings:Issuer");
@@ -50,8 +51,9 @@ public class JwtHelpers
             ValidateIssuerSigningKey = false,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey!))
         };
-        var result = await handler.ValidateTokenAsync(token, validationParameters);
-        return result;
+        handler.ValidateToken(token, validationParameters, out var validatedToken);
+
+        return validatedToken;
     }
 
     public string GenerateToken(string userName, int expireMinutes = 30)

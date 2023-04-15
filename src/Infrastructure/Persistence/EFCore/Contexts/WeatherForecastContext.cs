@@ -1,7 +1,8 @@
+using CleanArch.Application.Modules.WeatherForecasts.Repositories.EFcore;
 using CleanArch.Infrastructure.Persistence.EFCore.Configurations;
 
 namespace CleanArch.Infrastructure.Persistence.EFCore.Contexts;
-public class WeatherForecastContext : DbContext, IUnitOfWork
+public class WeatherForecastContext : DbContext, IWeatherForecastContext
 {
     public const string DEFAULT_SCHEMA = "dbo";
 

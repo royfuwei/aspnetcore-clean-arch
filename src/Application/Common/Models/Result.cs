@@ -1,4 +1,4 @@
-﻿namespace CleanArch.Domain.Common.Models;
+﻿namespace CleanArch.Application.Common.Models;
 
 public class Result
 {

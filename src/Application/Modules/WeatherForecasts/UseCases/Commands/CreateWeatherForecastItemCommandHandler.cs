@@ -24,6 +24,6 @@ public class CreateWeatherForecastItemCommandHandler : IRequestHandler<CreateWea
         await _repository.Add(entity);
         entity.AddWeatherForcastFinishDomainEvent();
 
-        return await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);;
+        return await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
     }
 }
