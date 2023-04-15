@@ -79,6 +79,9 @@ public static class ConfigureServices
             service.AddDbContext<WeatherForecastContext>(options => {
                 options.UseInMemoryDatabase("CleanArchDb");
             }, ServiceLifetime.Scoped);
+            service.AddDbContext<IdentityContext>(options => {
+                options.UseInMemoryDatabase("CleanArchDb");
+            }, ServiceLifetime.Scoped);
         } 
         else
         {
@@ -86,8 +89,18 @@ public static class ConfigureServices
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                     sqlServerOptionsAction: sqlOptions =>
                     {
-                        // sqlOptions.MigrationsAssembly(typeof(ConfigureServices).Assembly.FullName);
                         sqlOptions.MigrationsAssembly(typeof(WeatherForecastContext).Assembly.FullName);
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                    });
+                },
+                ServiceLifetime.Scoped
+            );
+
+            service.AddDbContext<IdentityContext>(options => {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                     });
                 },
