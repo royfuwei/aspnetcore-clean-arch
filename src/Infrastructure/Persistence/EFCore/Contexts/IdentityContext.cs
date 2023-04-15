@@ -1,3 +1,4 @@
+using System.Reflection;
 using CleanArch.Infrastructure.Identity;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
@@ -15,6 +16,11 @@ public class IdentityContext : ApiAuthorizationDbContext<ApplicationUser>, IUnit
     ) : base(options, operationalStoreOptions)
     {
         _mediator = mediator;
+    }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
     }
 
 
