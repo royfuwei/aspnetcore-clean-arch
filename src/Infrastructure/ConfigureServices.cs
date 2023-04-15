@@ -73,6 +73,7 @@ public static class ConfigureServices
 
         
         service.AddScoped<Persistence.EFCore.WeatherForecastContextSeed>();
+        service.AddScoped<Persistence.EFCore.IdentityContextSeed>();
 
         return service;
     }

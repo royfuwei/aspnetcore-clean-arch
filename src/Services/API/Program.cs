@@ -35,6 +35,15 @@ if (app.Environment.IsDevelopment())
         var initialiser = scope.ServiceProvider.GetRequiredService<WeatherForecastContextSeed>();
         await initialiser.InitialiseAsync();
         await initialiser.SeedAsync();
+        var identityInitialiser = scope.ServiceProvider.GetRequiredService<IdentityContextSeed>();
+        await identityInitialiser.InitialiseAsync();
+        if (builder.Configuration.GetValue<bool>("IdentityService:UseIdentityDefaultUser"))
+        {
+            var username = builder.Configuration.GetValue<string>("IdentityService:DefaultUser:UserName");
+            var email = builder.Configuration.GetValue<string>("IdentityService:DefaultUser:Email");
+            var password = builder.Configuration.GetValue<string>("IdentityService:DefaultUser:Password");
+            await identityInitialiser.SeedAsync(username, email, password);
+        }
     }
 }
 
