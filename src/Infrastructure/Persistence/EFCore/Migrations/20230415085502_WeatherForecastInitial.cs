@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class WeatherForecastInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "weatherforecast");
+                name: "dbo");
 
             migrationBuilder.CreateSequence(
                 name: "weatherforecastseq",
@@ -20,7 +20,7 @@ namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
 
             migrationBuilder.CreateTable(
                 name: "weatherForecasts",
-                schema: "weatherforecast",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -39,7 +39,7 @@ namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "weatherForecasts",
-                schema: "weatherforecast");
+                schema: "dbo");
 
             migrationBuilder.DropSequence(
                 name: "weatherforecastseq");

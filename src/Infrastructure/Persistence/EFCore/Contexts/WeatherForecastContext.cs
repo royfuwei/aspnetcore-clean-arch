@@ -3,7 +3,7 @@ using CleanArch.Infrastructure.Persistence.EFCore.Configurations;
 namespace CleanArch.Infrastructure.Persistence.EFCore.Contexts;
 public class WeatherForecastContext : DbContext, IUnitOfWork
 {
-    public const string DEFAULT_SCHEMA = "weatherforecast";
+    public const string DEFAULT_SCHEMA = "dbo";
 
     public required DbSet<WeatherForecast> WeatherForecasts { get; set; }
 

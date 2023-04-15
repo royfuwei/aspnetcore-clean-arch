@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
 {
     [DbContext(typeof(WeatherForecastContext))]
-    [Migration("20230413111416_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230415090006_WeatherForecastRenameTable")]
+    partial class WeatherForecastRenameTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace CleanArch.Infrastructure.Persistence.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("weatherForecasts", "weatherforecast");
+                    b.ToTable("WeatherForecasts", "dbo");
                 });
 #pragma warning restore 612, 618
         }
