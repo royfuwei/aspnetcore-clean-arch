@@ -65,6 +65,8 @@ dotnet ef database drop --project src/Infrastructure --startup-project src/Servi
     - [x] SqlServer
     - [x] InMemory
     - [x] Migration
+- [x] JwtBearer 身份認證與授權
+- [x] Identity Service
 - [ ] [AutoFac](https://autofac.org/)
 - [ ] [AutoMapper](https://automapper.org/)
 - [ ] [NUnit](https://nunit.org/)
