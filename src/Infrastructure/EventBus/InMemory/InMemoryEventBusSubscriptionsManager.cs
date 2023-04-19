@@ -11,6 +11,12 @@ public class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManage
 
     public event EventHandler<string> OnEventRemoved;
 
+    public InMemoryEventBusSubscriptionsManager()
+    {
+        _handlers = new Dictionary<string, List<SubscriptionInfo>>();
+        _eventTypes = new List<Type>();
+    }
+
     public void AddSubscription<T, TH>()
         where T : IntegrationEvent
         where TH : IIntegrationEventHandler<T>
