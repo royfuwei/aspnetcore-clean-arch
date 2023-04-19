@@ -1,4 +1,6 @@
 using CleanArch.Application;
+using CleanArch.Application.Modules.WeatherForecasts.EventHandlers.IntegrationEventHandlers;
+using CleanArch.Domain.IntegrationEvents.Interfaces;
 using CleanArch.Infrastructure;
 using CleanArch.Infrastructure.Persistence.EFCore;
 using CleanArch.Services.API;
@@ -20,6 +22,7 @@ builder.Services.AddCustomAuthentication(builder.Configuration);
 builder.Services.AddCustomAuthorization(builder.Configuration);
 builder.Services.AddCustomSwaggerGen(builder.Configuration);
 builder.Services.AddAPIServices(builder.Configuration);
+builder.Services.AddInMemoryEventBus(builder.Configuration);
 
 
 var app = builder.Build();
@@ -52,6 +55,19 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
 
+ConfigureEventBus(app);
+
 app.MapControllers();
 
 app.Run();
+
+
+/// <summary>
+/// 取得eventBus，並訂閱IntegrationEvent
+/// </summary>
+/// <param name="app"></param>
+void ConfigureEventBus(IApplicationBuilder app)
+{
+    var eventBus = app.ApplicationServices.GetRequiredService<CleanArch.Domain.IntegrationEvents.Interfaces.IEventBus>();
+    eventBus.Subscribe<WeatherForecastTestIEvent, IIntegrationEventHandler<WeatherForecastTestIEvent>>();
+}
