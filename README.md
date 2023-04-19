@@ -24,6 +24,13 @@ Simple Aspnet Clean Architecture
 dotnet run src/Services/API
 ```
 
+### docker
+目前先在`./` 使用`docker build`，之後再來想怎麼到不同`src/Services/...`裡面個別配置`Dockerfile`。
+
+```sh
+docker build -t aspnetcore-clean-arch:dev -f .
+docker run -it --rm -p 5000:80 aspnetcore-clean-arch
+```
 ### Test
 
 使用[xUnit](https://xunit.net/)
