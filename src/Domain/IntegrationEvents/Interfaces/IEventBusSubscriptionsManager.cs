@@ -4,7 +4,7 @@ namespace CleanArch.Domain.IntegrationEvents.Interfaces;
 /// Event Manager
 /// 給像是 RabbitMQ, InMemory Queue 所定的interface
 /// </summary>
-public interface IEventBusManager
+public interface IEventBusSubscriptionsManager
 {
     bool IsEmpty { get; }
 
@@ -17,6 +17,12 @@ public interface IEventBusManager
     void RemoveSubscription<T, TH>()
             where TH : IIntegrationEventHandler<T>
             where T : IntegrationEvent;
+
+    void AddDynamicSubscription<TH>(string eventName)
+        where TH : IDynamicIntegrationEventHandler;
+
+    void RemoveDynamicSubscription<TH>(string eventName)
+        where TH : IDynamicIntegrationEventHandler;
 
     bool HasSubscriptionsForEvent<T>() where T : IntegrationEvent;
     bool HasSubscriptionsForEvent(string eventName);

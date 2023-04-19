@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using CleanArch.Domain.IntegrationEvents.Interfaces;
 
 namespace CleanArch.Domain.IntegrationEvents;
-public record IntegrationEvent : IIntegrationEvent
+public record IntegrationEvent
 {
     [JsonInclude]
     public Guid Id { get; private init; }
