@@ -24,6 +24,18 @@ Simple Aspnet Clean Architecture
 dotnet run src/Services/API
 ```
 
+### Test
+
+使用[xUnit](https://xunit.net/)
+
+```sh
+dotnet test
+
+# or
+
+dotnet test test/Domain.UnitTests
+
+```
 ### Entity Framework Core
 
 #### Migration
@@ -69,7 +81,7 @@ dotnet ef database drop --project src/Infrastructure --startup-project src/Servi
 - [x] Identity Service
 - [ ] [AutoFac](https://autofac.org/)
 - [ ] [AutoMapper](https://automapper.org/)
-- [ ] [NUnit](https://nunit.org/)
+- [x] [xUnit](https://xunit.net/)
 - [ ] [FluentValidation](https://docs.fluentvalidation.net/en/latest/)
 - [ ] Dockerfile
 - [ ] Mongodb
