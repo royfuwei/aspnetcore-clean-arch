@@ -2,6 +2,8 @@ using System.Reflection;
 using CleanArch.Application.Modules.Identity;
 using CleanArch.Application.Modules.WeatherForecasts.Repositories.EFcore;
 using CleanArch.Application.Modules.WeatherForecasts.Repositories.InMemory;
+using CleanArch.Domain.IntegrationEvents.Interfaces;
+using CleanArch.Infrastructure.EventBus.InMemory;
 using CleanArch.Infrastructure.Persistence.EFCore.Contexts;
 using CleanArch.Infrastructure.Persistence.InMemory;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +24,14 @@ public static class ConfigureServices
         return services;
     }
 
-    
-    
+    public static IServiceCollection AddInMemoryEventBus(this IServiceCollection services, IConfiguration configuration)
+    {
+        // 先用 EventBusInMemory 測試，之後再加入EventBusRabbitMQ
+        services.AddSingleton<IEventBus, EventBusInMemory>();
+        services.AddSingleton<InMemoryEventBusSubscriptionsManager>();
+        return services;
+    }
+
     public static IServiceCollection AddCustomDbContext(this IServiceCollection service, IConfiguration configuration)
     {
         if (bool.Parse(configuration["UseInMemoryDatabase"]!))
